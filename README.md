@@ -34,14 +34,3 @@ Leveraging the physical array properties of a complete binary tree to establish 
 
 ---
 
-## 📂 Source Directory Tree
-
-```text
-├── src/
-│   ├── InsertSort.c   # Straight Insertion & Shell Sort implementations
-│   ├── SelectSort.c   # Dual-Selection & Heap Sort implementations
-│   ├── BubbleSort.c   # Pruning-optimized Bubble Sort implementation
-│   └── QuickSort.c    # Quick Sort matrix modules (In Development...)
-├── include/
-│   └── Sort.h         # Global function signatures & macro declarations
-└── README.md          # Project documentation
