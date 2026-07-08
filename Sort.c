@@ -149,3 +149,163 @@ void BubbleSort(int* arr, int n) {
 		}
 	}
 }
+
+int GetMidNum(int* arr, int left, int right) {
+	assert(arr);
+
+	int mid = left + (right - left) / 2;
+
+	if (arr[left] > arr[right]) {
+		if (arr[right] > arr[mid]) {
+			return right;
+		}
+		else if (arr[mid] > arr[left]){
+			return left;
+		}
+		else {
+			return mid;
+		}
+	}
+	else{
+		if (arr[left] > arr[mid]) {
+			return left;
+		}
+		else if(arr[mid] > arr[right]) {
+			return right;
+		}
+		else {
+			return mid;
+		}
+	}
+}
+
+
+
+
+int PartSort1(int* arr, int left, int right) {
+	assert(arr);
+
+	int midi = GetMidNum(arr, left, right);
+	if (midi != left) {
+		Swap(&arr[midi], &arr[left]); 
+	}
+
+	int keyindex = left;
+	int	begin = left;
+	int end = right;
+
+	while (begin < end) {
+		while (begin < end && arr[end] >= arr[keyindex]) {
+			end--;
+		}
+
+		while (begin < end && arr[begin] <= arr[keyindex]) {
+			begin++;
+		}
+
+		Swap(&arr[begin], &arr[end]);
+	}
+
+	Swap(&arr[keyindex], &arr[begin]);
+
+	return begin;
+}
+
+
+int PartSort2(int* arr, int left, int right) {
+	assert(arr);
+
+	int midi = GetMidNum(arr, left, right);
+	if (midi != left) {
+		Swap(&arr[midi], &arr[left]);
+	}
+
+	int begin = left;
+	int end = right;
+	int hole = begin;
+	int tmp = arr[hole];
+
+	while (begin < end) {
+		while (begin < end && arr[end] >= tmp) {
+			end--;
+		}
+
+		arr[hole] = arr[end];
+		hole = end;
+
+		while (begin < end && arr[begin] <= tmp) {
+			begin++;
+		}
+
+		arr[hole] = arr[begin];
+		hole = begin;
+	}
+
+	arr[hole] = tmp;
+
+	return hole;
+
+}
+
+
+
+int PartSort3(int* arr, int left, int right) {
+	assert(arr);
+
+	int midi = GetMidNum(arr, left, right);
+	if (midi != left) {
+		Swap(&arr[midi], &arr[left]);
+	}
+
+	int keyindex = left;
+	int tmp = arr[keyindex];
+
+	int cur = right-1, prev = right;
+
+	while (cur >=left) {
+
+		if (arr[cur] > tmp && --prev != cur) {
+			Swap(&arr[cur], &arr[prev]);
+		}
+
+		--cur;
+	}
+
+	--prev;
+	Swap(&arr[keyindex], &arr[prev]);
+
+	return prev;
+
+	/*assert(arr);
+	int keyi = left, prev = left, pcur = prev + 1;
+
+	while (pcur <= right) {
+		
+		if (arr[pcur] < arr[keyi] && ++prev != pcur) {
+			Swap(&arr[pcur], &arr[prev]);
+		}
+		++pcur;
+	}
+	Swap(&arr[keyi], &arr[prev]);
+
+	return prev;*/
+}
+
+
+void QuickSort(int* arr, int left, int right) {
+	assert(arr);
+
+	if (left >= right) {
+		return;
+	}
+
+	if (right - left + 1 <= 10) {
+		SelectInsert(arr+left, right - left + 1);
+		return;
+	}
+
+	int div = PartSort3(arr, left, right);
+
+	QuickSort(arr, left, div - 1);
+	QuickSort(arr, div + 1, right);
+}
