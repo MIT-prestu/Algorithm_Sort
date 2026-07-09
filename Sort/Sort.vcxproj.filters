@@ -18,9 +18,15 @@
     <ClInclude Include="Sort.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Stack_Queue\Stack_Queue\Stack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sort.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Stack_Queue\Stack_Queue\Stack.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
